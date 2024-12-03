@@ -41,7 +41,7 @@ Lua4Array = lambda subcon: PrefixedArray(subcon, length_field=SLInt32('length'))
 
 Lua4Header = Struct('header',
     Const(ULInt8('format_id'), 0x1B),
-    Magic('Lua'),
+    Magic(b'Lua'),
     ULInt8('version'),
     Flag('little_endian', default=True)
 )
