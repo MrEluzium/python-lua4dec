@@ -105,14 +105,16 @@ class Lua4DebugFormatter(Lua4Formatter):
 
         if op is OPCODE.OP_GETLOCAL:
             L = GETARG_U(i)
-            return 'LOCAL[{0}]'.format(chunk.local_var[L].name)
+            if len(chunk.local_var) > L:
+                return 'LOCAL[{0}]'.format(chunk.local_var[L].name)
         if op is OPCODE.OP_GETGLOBAL:
             U = GETARG_U(i)
             return 'GLOBAL[{0}]'.format(chunk.constants.string[U])
 
         if op is OPCODE.OP_SETLOCAL:
             L = GETARG_U(i)
-            return 'LOCAL[{0}]='.format(chunk.local_var[L].name)
+            if len(chunk.local_var) > L:
+                return 'LOCAL[{0}]='.format(chunk.local_var[L].name)
         if op is OPCODE.OP_SETGLOBAL:
             U = GETARG_U(i)
             return 'GLOBAL[{0}]='.format(chunk.constants.string[U])
